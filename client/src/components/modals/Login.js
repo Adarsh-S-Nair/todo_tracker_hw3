@@ -2,7 +2,7 @@ import React, { useState } 	from 'react';
 import { LOGIN } 			from '../../cache/mutations';
 import { useMutation }    	from '@apollo/client';
 
-import { WModal, WMHeader, WMMain, WMFooter, WButton, WInput } from 'wt-frontend';
+import { WModal, WMHeader, WMMain, WMFooter, WButton, WInput, WRow, WCol } from 'wt-frontend';
 
 const Login = (props) => {
 	const [input, setInput] = useState({ email: '', password: '' });
@@ -37,32 +37,43 @@ const Login = (props) => {
 	return (
         // Replace div with WModal
 
-		<div className="login-modal modal">
-			<div className="modal-header" onClose={() => props.setShowLogin(false)}>
-				Login
-			</div>
+		<div className="overlay">
+			<div className="login-modal modal">
+				<WRow className="modal-col-gap">
+					<WCol size="11">
+						<div className="modal-header" onClose={() => props.setShowLogin(false)}>
+							Login
+						</div>
+					</WCol>
+					<WCol size="1">
+						<WButton onClick={() => props.setShowLogin(false)} hoverAnimation="darken" wType="texted" className="modal-close-button">
+							<i className="material-icons">close</i>
+						</WButton>
+					</WCol>
+				</WRow>
+				<div className="modal-spacer">&nbsp;</div>
+				{
+					loading ? <div />
+						: <div className="main-login-modal">
 
-			{
-				loading ? <div />
-					: <div className="main-login-modal">
+							<WInput className="modal-input" onBlur={updateInput} name='email' labelAnimation="up" barAnimation="solid" labelText="Email Address" wType="outlined" inputType='text' />
+							<div className="modal-spacer">&nbsp;</div>
+							<WInput className="modal-input" onBlur={updateInput} name='password' labelAnimation="up" barAnimation="solid" labelText="Password" wType="outlined" inputType='password' />
 
-						<WInput className="modal-input" onBlur={updateInput} name='email' labelAnimation="up" barAnimation="solid" labelText="Email Address" wType="outlined" inputType='text' />
-						<div className="modal-spacer">&nbsp;</div>
-						<WInput className="modal-input" onBlur={updateInput} name='password' labelAnimation="up" barAnimation="solid" labelText="Password" wType="outlined" inputType='password' />
+							{
+								showErr ? <div className='modal-error'>
+									{errorMsg}
+								</div>
+									: <div className='modal-error'>&nbsp;</div>
+							}
 
-						{
-							showErr ? <div className='modal-error'>
-								{errorMsg}
-							</div>
-								: <div className='modal-error'>&nbsp;</div>
-						}
-
-					</div>
-			}
-			<div>
-				<WButton className="modal-button" onClick={handleLogin} span clickAnimation="ripple-light" hoverAnimation="darken" shape="rounded" color="primary">
-					Login
-				</WButton>
+						</div>
+				}
+				<div>
+					<WButton className="modal-button" onClick={handleLogin} span clickAnimation="ripple-light" hoverAnimation="darken" shape="rounded" color="primary">
+						Login
+					</WButton>
+				</div>
 			</div>
 		</div>
 	);

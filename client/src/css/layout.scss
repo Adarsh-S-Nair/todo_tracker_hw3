@@ -132,7 +132,11 @@ html {
     left: 40%;
     top: 30%;
     padding: 30px 20px;
-    width: 375px;
+    width: 350px;
+}
+
+.modal-header {
+    text-align: left;
 }
 
 .modal-col-gap{
@@ -147,10 +151,6 @@ html {
 
 .modal-spacer {
     height: 24px;
-}
-
-.main-login-modal {
-    padding: 24px 24px 0px 24px;
 }
 
 .modal-error {

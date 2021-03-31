@@ -45,14 +45,16 @@ const CreateAccount = (props) => {
 		<div class="overlay">
 			<div className="signup-modal modal">
 				<WRow className="modal-col-gap">
-					<WCol size="8">
+					<WCol size="11">
 						<div className="modal-header" onClose={() => props.setShowCreate(false)}>
 							Sign Up
 						</div>
 					</WCol>
-					<WButton onClick={() => props.setShowCreate(false)} wType="texted" className="modal-close-button">
-                        <i className="material-icons">close</i>
-                    </WButton>
+					<WCol size="1">
+						<WButton onClick={() => props.setShowCreate(false)} wType="texted" className="modal-close-button" hoverAnimation="darken">
+							<i className="material-icons">close</i>
+						</WButton>
+					</WCol>
 				</WRow>
 				<div className="modal-spacer">&nbsp;</div>
 				{
