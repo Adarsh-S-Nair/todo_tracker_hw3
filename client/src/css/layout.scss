@@ -127,11 +127,11 @@ html {
     width: 100%;
 }
 
-.login-modal {
-    width: 350px;
-}
-
-.signup-modal {
+.modal {
+    position: absolute;
+    left: 40%;
+    top: 30%;
+    padding: 30px 20px;
     width: 375px;
 }
 

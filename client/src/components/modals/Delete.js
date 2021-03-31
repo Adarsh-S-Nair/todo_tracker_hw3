@@ -10,7 +10,7 @@ const Delete = (props) => {
     }
 
     return (
-        <div className="delete-modal">
+        <div className="delete-modal modal">
             <div className="modal-header" onClose={() => props.setShowDelete(false)}>
                 Delete List?
 			</div>
