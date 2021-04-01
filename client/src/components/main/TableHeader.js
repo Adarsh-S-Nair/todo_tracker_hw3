@@ -9,7 +9,7 @@ const TableHeader = (props) => {
 
     return (
         <WRow className="table-header">
-            <WCol size="4">
+            <WCol size="3">
                 <WButton className='table-header-section' wType="texted" >Task</WButton>
             </WCol>
 
@@ -25,7 +25,7 @@ const TableHeader = (props) => {
                 <WButton className='table-header-section' wType="texted" >Assigned To</WButton>
             </WCol>
 
-            <WCol size="2">
+            <WCol size="3">
                 <div className="table-header-buttons">
                     <WButton className={`${buttonStyle}`} onClick={props.undo} wType="texted" clickAnimation="ripple-light" shape="rounded">
                         <i className="material-icons">undo</i>

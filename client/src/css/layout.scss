@@ -88,6 +88,11 @@ html {
     padding: 0.25vw;
 }
 
+.disabled-table-entry-buttons {
+    padding: 0.25vw;
+    cursor: default;
+}
+
 .table-entry {
     height: 50px;
 }

@@ -6,6 +6,10 @@ const TableEntry = (props) => {
 
     const completeStyle = data.completed ? ' complete-task' : ' incomplete-task';
     const assignedToStyle = data.completed ? 'assigned-to-complete' : 'assigned-to-incomplete';
+    const topItem = props.data == props.list[0];
+    const bottomItem = props.data == props.list[props.list.length-1];
+    const upArrowStyle = topItem ? 'disabled-table-entry-buttons' : 'table-entry-buttons';
+    const downArrowStyle = bottomItem ? 'disabled-table-entry-buttons' : 'table-entry-buttons';
 
     const description = data.description;
     const due_date = data.due_date;
@@ -46,7 +50,7 @@ const TableEntry = (props) => {
 
     return (
         <WRow className='table-entry'>
-            <WCol size="4">
+            <WCol size="3">
                 {
                     editingDescr || description === ''
                         ? <WInput
@@ -104,12 +108,12 @@ const TableEntry = (props) => {
                 }
             </WCol>
 
-            <WCol size="2">
+            <WCol size="3">
                 <div className='button-group'>
-                    <WButton className="table-entry-buttons" onClick={() => props.reorderItem(data._id, -1)} wType="texted">
+                    <WButton className={upArrowStyle} onClick={() => {if(topItem) {props.reorderItem(data._id, -1)}}} wType="texted">
                         <i className="material-icons">expand_less</i>
                     </WButton>
-                    <WButton className="table-entry-buttons" onClick={() => props.reorderItem(data._id, 1)} wType="texted">
+                    <WButton className={downArrowStyle} onClick={() => {if(bottomItem) {props.reorderItem(data._id, 1)}}} wType="texted">
                         <i className="material-icons">expand_more</i>
                     </WButton>
                     <WButton className="table-entry-buttons" onClick={() => props.deleteItem(data)} wType="texted">

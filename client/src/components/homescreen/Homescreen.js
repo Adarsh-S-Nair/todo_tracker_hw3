@@ -79,7 +79,7 @@ const Homescreen = (props) => {
 			id: lastID,
 			description: 'No Description',
 			due_date: 'No Date',
-			assigned_to: "No One",
+			assigned_to: "Not Assigned",
 			completed: false
 		};
 		let opcode = 1;

@@ -235,3 +235,8 @@ textarea:focus, input:focus{
 .table-entry-buttons {
     color: $text-color;
 }
+
+.disabled-table-entry-buttons {
+    transition: 0.1s ease-in-out;
+    filter: invert(0.2);
+}
