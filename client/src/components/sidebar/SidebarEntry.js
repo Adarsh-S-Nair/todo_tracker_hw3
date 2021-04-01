@@ -8,11 +8,11 @@ const SidebarEntry = (props) => {
     const handleEditing = (e) => {
         e.stopPropagation();
         setPreEdit(props.name);
-        toggleEditing(!editing);
+        if(!editing) toggleEditing(true);
     };
 
     const handleSubmit = (e) => {
-        handleEditing(e);
+        toggleEditing(false);
         const { name, value } = e.target;
         props.updateListField(props._id, name, value, preEdit);
     };
@@ -25,7 +25,7 @@ const SidebarEntry = (props) => {
             onClick={() => { props.handleSetActive(props.id) }} hoverAnimation="lighten"
         >
             {
-                editing ? <WInput className="list-item-edit" inputClass="list-item-edit-input" wType="lined" barAnimation="solid" name='name' onBlur={handleSubmit} autoFocus={true} defaultValue={props.name} />
+                editing ? <WInput className="list-item-edit" inputClass="list-item-edit-input" wType="lined" barAnimation="left-to-right" name='name' onBlur={handleSubmit} autoFocus={true} defaultValue={props.name} />
                     :   <div className='list-text'>
                             {props.name}
                         </div>

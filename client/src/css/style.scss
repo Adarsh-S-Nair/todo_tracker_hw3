@@ -61,6 +61,14 @@ html, body {
     color: $primary-color;
 }
 
+.assigned-to-complete {
+    color: rgb(32, 32, 32);
+}
+
+.assigned-to-incomplete {
+    color: rgb(255, 101, 101);
+}
+
 .list-item-active {
     background-color: var(--deep-blue);
 }
@@ -112,6 +120,10 @@ html, body {
     color: var(--light-gray);
 }
 
+.modal-button {
+    color: var(--light-gray);
+}
+
 @keyframes modalanimation {
     from {top: -300px; opacity: 0}
     to {top: 30%; opacity: 1}
@@ -144,6 +156,7 @@ html, body {
 }
 
 .table-entry {
+    user-select: none;
     border-bottom: 1px solid;
     color: $text-color;
     transition: 0.1s ease-in-out;
@@ -181,16 +194,15 @@ html, body {
 }
 
 .table-input {
-    /*background-color: var(--deep-blue-lighter);
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 1px solid;
-    margin: 0;
-    padding:0;
+    color: $text-color;
+    background-color: transparent;
+    outline: none;
     font-family: 'Roboto';
     font-size: 14px;
-    color: var(--light-gray);*/
+}
+
+textarea:focus, input:focus{
+    outline: none;
 }
 
 .table-select {
@@ -198,7 +210,7 @@ html, body {
     //font-size: 14px;
     font-size: 1.125rem;
     border: none;
-    background-color: var(--deep-blue-lighter);
+    background-color: $background-color;
     color: var(--light-gray);
 }
 

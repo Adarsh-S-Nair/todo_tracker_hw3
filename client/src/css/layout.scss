@@ -69,44 +69,40 @@ html {
 }
 
 .table-header-button {
-    padding: 0;
-    margin-left: 36px;
+    padding: 0.25vw;
 }
 
 .table-header-button-disabled{
-    padding: 0;
-    margin-left: 12px;
+    padding: 0.25vw;
     cursor: default;
 }
 
 .table-header-buttons {
-    float: right;
+    padding-left: 20px;
     height: 100%;
     display: flex;
     align-items: center;
 }
 
 .table-entry-buttons {
-    padding: 0;
-    margin-left: 18px;
-    margin-right: 18px;
+    padding: 0.25vw;
 }
 
 .table-entry {
-    //padding: 12px 24px;
-    //padding: 12px 0;
+    height: 50px;
 }
 
 .button-group {
+    padding-left: 20px;
     height: 100%;
     display: flex;
     align-items: center;
 }
 
 .sidebar-header {
-    width: calc(100% - 48px);
+    width: 100%;
     box-sizing: border-box;
-    margin-left: 24px;
+    padding-left: 24px;
     margin-right: 24px;
     padding-top: 24px;
     padding-bottom: 12px
@@ -159,10 +155,6 @@ html {
     display: flex;
 }
 
-.delete-modal {
-    width: fit-content;
-}
-
 .col-spacer {
     width: 24px;
     display: inline-block;
@@ -173,6 +165,7 @@ html {
 }
 
 .list-item-edit, .table-input, .table-select {
+    height: 100%;
     width: 100%;
 }
 

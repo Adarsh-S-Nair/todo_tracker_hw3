@@ -5,13 +5,16 @@ const TableEntry = (props) => {
     const { data } = props;
 
     const completeStyle = data.completed ? ' complete-task' : ' incomplete-task';
+    const assignedToStyle = data.completed ? 'assigned-to-complete' : 'assigned-to-incomplete';
 
     const description = data.description;
     const due_date = data.due_date;
     const status = data.completed ? 'complete' : 'incomplete';
+    const assigned_to = data.assigned_to;
     const [editingDate, toggleDateEdit] = useState(false);
     const [editingDescr, toggleDescrEdit] = useState(false);
     const [editingStatus, toggleStatusEdit] = useState(false);
+    const [editingAssigned, toggleAssignedEdit] = useState(false);
 
     const handleDateEdit = (e) => {
         toggleDateEdit(false);
@@ -34,6 +37,13 @@ const TableEntry = (props) => {
         props.editItem(data._id, 'completed', newStatus, prevStatus);
     };
 
+    const handleAssignedEdit = (e) => {
+        toggleAssignedEdit(false);
+        const newAssigned = e.target.value ? e.target.value : false;
+        const prevAssigned = assigned_to;
+        props.editItem(data._id, 'assigned_to', newAssigned, prevAssigned);
+    }
+
     return (
         <WRow className='table-entry'>
             <WCol size="4">
@@ -42,16 +52,16 @@ const TableEntry = (props) => {
                         ? <WInput
                             className='table-input' onBlur={handleDescrEdit}
                             autoFocus={true} defaultValue={description} type='text'
-                            wType="outlined" barAnimation="solid" inputClass="table-input-class"
+                            wType="lined" barAnimation="left-to-right" inputClass="table-input"
                         />
                         : <div className="table-text"
-                            onClick={() => toggleDescrEdit(!editingDescr)}
+                            onClick={() => toggleDescrEdit(true)}
                         >{description}
                         </div>
                 }
             </WCol>
 
-            <WCol size="3">
+            <WCol size="2">
                 {
                     editingDate ? <input
                         className='table-input' onBlur={handleDateEdit}
@@ -59,7 +69,7 @@ const TableEntry = (props) => {
                         wType="outlined" barAnimation="solid" inputClass="table-input-class"
                     />
                         : <div className="table-text"
-                            onClick={() => toggleDateEdit(!editingDate)}
+                            onClick={() => toggleDateEdit(true)}
                         >{due_date}
                         </div>
                 }
@@ -74,13 +84,27 @@ const TableEntry = (props) => {
                         <option value="complete">complete</option>
                         <option value="incomplete">incomplete</option>
                     </select>
-                        : <div onClick={() => toggleStatusEdit(!editingStatus)} className={`${completeStyle} table-text`}>
+                        : <div onClick={() => toggleStatusEdit(true)} className={`${completeStyle} table-text`}>
                             {status}
                         </div>
                 }
             </WCol>
 
-            <WCol size="3">
+            <WCol size="2">
+                {
+                    editingAssigned ? <WInput
+                        className='table-input' onBlur={handleAssignedEdit}
+                        autoFocus={true} defaultValue={assigned_to} type='text'
+                        wType="lined" barAnimation="left-to-right" inputClass="table-input"
+                    />
+                    : <div className={`${assignedToStyle} table-text`}
+                        onClick={() => toggleAssignedEdit(true)}
+                    >{assigned_to}
+                    </div>
+                }
+            </WCol>
+
+            <WCol size="2">
                 <div className='button-group'>
                     <WButton className="table-entry-buttons" onClick={() => props.reorderItem(data._id, -1)} wType="texted">
                         <i className="material-icons">expand_less</i>
