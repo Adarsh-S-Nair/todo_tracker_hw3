@@ -3,6 +3,7 @@
 }
 
 html {
+    overflow-x: hidden;
     height: 100%;
 }
 
@@ -17,6 +18,10 @@ html {
     width: 100%;
     height: 100%;
     display: flex;
+}
+
+.table-header-container {
+    padding: 0 24px;
 }
 
 .wsidebar {
@@ -42,25 +47,26 @@ html {
 }
 
 .table {
-    display: flex;
-    //float: left;
+    //min-width: 809px;
     width: 100%;
-    flex-direction: column;
-    //align-items: center;
-}
-
-.table-entries {
-    overflow-y: scroll;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .table-header {
-    width: calc(100% - 56px);
     box-sizing: border-box;
-    margin-left: 24px;
-    margin-right: 32px;
 }
 
 .table-header-section {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    padding-top: 24px;
+    padding-bottom: 12px;
+}
+
+.table-header-section-disabled{
     width: 100%;
     height: 100%;
     padding: 0;
