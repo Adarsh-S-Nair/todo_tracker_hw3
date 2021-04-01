@@ -118,7 +118,7 @@ html, body {
 }
 
 .sidebar-header {
-    border-bottom: 2px dotted;
+    border-bottom: 2px solid;
 }
 
 .sidebar-header-name {
@@ -165,7 +165,7 @@ html, body {
 }
 
 .table-header {
-    border-bottom: 2px $text-color dotted;
+    border-bottom: 2px $text-color solid;
 }
 
 .table-header-section {
