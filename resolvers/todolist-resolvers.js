@@ -163,7 +163,21 @@ module.exports = {
 			listItems = found.items;
 			return (found.items);
 
+		},
+		moveListToTop: async (_, args) => {
+			const { _id, owner } = args;
+			const listId = new ObjectId(_id);
+			const lists = await Todolist.find({owner: owner}).sort({index: -1}).exec();
+			const largestIndex = lists[0].index;
+			const list = await Todolist.findOne({_id: listId});
+			list.index = largestIndex + 1;
+			try {
+				await list.save();
+				return true;
+			} catch (error) {
+				console.log(error);
+				return false;
+			}
 		}
-
 	}
 }

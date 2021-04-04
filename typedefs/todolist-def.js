@@ -8,6 +8,7 @@ const typeDefs = gql `
 		name: String!
 		owner: String!
 		items: [Item]
+		index: Int!
 	}
 	type Item {
 		_id: String!
@@ -29,6 +30,7 @@ const typeDefs = gql `
 		updateTodolistField(_id: String!, field: String!, value: String!): String
 		updateItemField(itemId: String!, _id: String!, field: String!, value: String!, flag: Int!): [Item]
 		reorderItems(itemId: String!, _id: String!, direction: Int!): [Item]
+		moveListToTop(_id: String!, owner: String!): Boolean
 	}
 	input FieldInput {
 		_id: String

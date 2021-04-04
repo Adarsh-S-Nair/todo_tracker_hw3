@@ -16,11 +16,12 @@ import { UpdateListField_Transaction,
 	ReorderItems_Transaction, 
 	EditItem_Transaction } 				from '../../utils/jsTPS';
 import WInput from 'wt-frontend/build/components/winput/WInput';
+import { PromiseProvider } from 'mongoose';
 
 
 const Homescreen = (props) => {
 
-	let todolists 							= [];
+	const [todolists, setTodoLists]			= useState([]);
 	const [activeList, setActiveList] 		= useState({});
 	const [showDelete, toggleShowDelete] 	= useState(false);
 	const [showLogin, toggleShowLogin] 		= useState(false);
@@ -33,13 +34,15 @@ const Homescreen = (props) => {
 	const [DeleteTodoItem] 			= useMutation(mutations.DELETE_ITEM);
 	const [AddTodolist] 			= useMutation(mutations.ADD_TODOLIST);
 	const [AddTodoItem] 			= useMutation(mutations.ADD_ITEM);
+	const [MoveListToTop]			= useMutation(mutations.MOVE_LIST_TO_TOP);
 
 
 	const { loading, error, data, refetch } = useQuery(GET_DB_TODOS);
-	if(loading) { console.log(loading, 'loading'); }
-	if(error) { console.log(error, 'error'); }
-	if(data) { todolists = data.getAllTodos; }
-
+	useEffect(() => {
+		if(loading) { console.log(loading, 'loading'); }
+		if(error) { console.log(error, 'error'); }
+		if(data) { setTodoLists(data.getAllTodos); }
+	}, [loading, error, data])
 	const auth = props.user === null ? false : true;
 
 	const refetchTodos = async (refetch) => {
@@ -127,8 +130,13 @@ const Homescreen = (props) => {
 	};
 
 	const createNewList = async () => {
-		const length = todolists.length
-		const id = length >= 1 ? todolists[length - 1].id + Math.floor((Math.random() * 100) + 1) : 1;
+		let largest_id = 1;
+		todolists.forEach(function(list) {
+			if(list.id > largest_id){
+				largest_id = list.id;
+			}
+		})
+		const id = largest_id + 1;
 		let list = {
 			_id: '',
 			id: id,
@@ -141,6 +149,7 @@ const Homescreen = (props) => {
 	};
 
 	const deleteList = async (_id) => {
+		props.tps.clearAllTransactions();
 		DeleteTodolist({ variables: { _id: _id }, refetchQueries: [{ query: GET_DB_TODOS }] });
 		refetch();
 		setActiveList({});
@@ -153,9 +162,18 @@ const Homescreen = (props) => {
 
 	};
 
+	const moveListToTop = async (_id, owner) => {
+		MoveListToTop({ variables: { _id: _id, owner: owner }, refetchQueries: [{ query: GET_DB_TODOS }] });
+	}
+
 	const handleSetActive = (id) => {
 		const todo = todolists.find(todo => todo.id === id || todo._id === id);
+		const index = todolists.indexOf(todo);
+    	// var copy = [...todolists];
+    	// copy.splice(index, 1);
+    	// copy.unshift(todo);
 		setActiveList(todo);
+		moveListToTop(todo._id, todo.owner);
 	};
 
 	

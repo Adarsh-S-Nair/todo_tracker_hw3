@@ -37,13 +37,9 @@ html {
 }
 
 .table-text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-wrap: break-word;
     font-size: 1.125rem;
-    padding-bottom: 12px;
-    padding-top: 12px;
-    cursor: pointer;
+    padding: 17px 20px 17px 0px;
 }
 
 .table {
@@ -100,7 +96,8 @@ html {
 }
 
 .table-entry {
-    height: 50px;
+    align-items: center;
+    height:auto;
 }
 
 .button-group {
@@ -176,8 +173,8 @@ html {
 }
 
 .list-item-edit, .table-input, .table-select {
-    height: 100%;
-    width: 100%;
+    overflow-wrap: break-word;
+    font-size: 1.125rem;
 }
 
 .list-item-edit-input {

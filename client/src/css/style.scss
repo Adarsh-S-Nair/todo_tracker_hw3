@@ -84,7 +84,7 @@ html, body {
 .logo {
 	color: $primary-color;
     font-size: 1.5rem;
-    font-family: "Roboto Mono", monospace;
+    font-family: "Consolas", monospace;
     text-transform: uppercase;
     font-weight: bold;
 } 
@@ -203,20 +203,12 @@ html, body {
     cursor: pointer;
 }
 
-.table-input {
-    color: $text-color;
-    background-color: transparent;
-    outline: none;
-    font-family: 'Roboto';
-    font-size: 14px;
-}
-
 textarea:focus, input:focus{
     outline: none;
 }
 
 .table-select {
-    font-family: Roboto;
+    font-family: 'Consolas';
     //font-size: 14px;
     font-size: 1.125rem;
     border: none;
