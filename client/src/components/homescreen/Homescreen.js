@@ -11,7 +11,9 @@ import * as mutations 					from '../../cache/mutations';
 import { useMutation, useQuery } 		from '@apollo/client';
 import { WNavbar, WSidebar, WNavItem } 	from 'wt-frontend';
 import { WLayout, WLHeader, WLMain, WLSide } from 'wt-frontend';
-import { UpdateListField_Transaction, 
+import { 
+	UpdateList_Transaction,
+	UpdateListField_Transaction, 
 	UpdateListItems_Transaction, 
 	ReorderItems_Transaction, 
 	EditItem_Transaction } 				from '../../utils/jsTPS';
@@ -21,7 +23,7 @@ import { PromiseProvider } from 'mongoose';
 
 const Homescreen = (props) => {
 
-	const [todolists, setTodoLists]			= useState([]);
+	let todolists 							= [];
 	const [activeList, setActiveList] 		= useState({});
 	const [showDelete, toggleShowDelete] 	= useState(false);
 	const [showLogin, toggleShowLogin] 		= useState(false);
@@ -35,14 +37,14 @@ const Homescreen = (props) => {
 	const [AddTodolist] 			= useMutation(mutations.ADD_TODOLIST);
 	const [AddTodoItem] 			= useMutation(mutations.ADD_ITEM);
 	const [MoveListToTop]			= useMutation(mutations.MOVE_LIST_TO_TOP);
+	const [SortByField]				= useMutation(mutations.SORT_BY_FIELD);
+	const [SetList]					= useMutation(mutations.SET_LIST);
 
 
 	const { loading, error, data, refetch } = useQuery(GET_DB_TODOS);
-	useEffect(() => {
-		if(loading) { console.log(loading, 'loading'); }
-		if(error) { console.log(error, 'error'); }
-		if(data) { setTodoLists(data.getAllTodos); }
-	}, [loading, error, data])
+	if(loading) { console.log(loading, 'loading'); }
+	if(error) { console.log(error, 'error'); }
+	if(data) { todolists = data.getAllTodos; }
 	const auth = props.user === null ? false : true;
 
 	const refetchTodos = async (refetch) => {
@@ -167,14 +169,18 @@ const Homescreen = (props) => {
 	}
 
 	const handleSetActive = (id) => {
+		props.tps.clearAllTransactions();
 		const todo = todolists.find(todo => todo.id === id || todo._id === id);
-		const index = todolists.indexOf(todo);
-    	// var copy = [...todolists];
-    	// copy.splice(index, 1);
-    	// copy.unshift(todo);
 		setActiveList(todo);
 		moveListToTop(todo._id, todo.owner);
 	};
+
+	const sortByField = async (_id, field) => {
+		let prev = activeList.items;
+		let transaction = new UpdateList_Transaction(_id, field, prev, SortByField, SetList);
+		props.tps.addTransaction(transaction);
+		tpsRedo();
+	}
 
 	
 	/*
@@ -243,6 +249,7 @@ const Homescreen = (props) => {
 									setShowDelete={setShowDelete}
 									activeList={activeList} setActiveList={setActiveList}
 									undo={tpsUndo} redo={tpsRedo} tps={props.tps}
+									sortByField={sortByField}
 								/>
 							</div>
 						:

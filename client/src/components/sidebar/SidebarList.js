@@ -6,12 +6,12 @@ const SidebarList = (props) => {
     console.log(props.todolists);
     const mostRecentLists = [...props.todolists]
     mostRecentLists.sort((a, b) => {if ( a.index < b.index ){
-        return 1;
-        }
-        if ( a.index > b.index ){
-        return -1;
-        }
-        return 0;})
+                                        return 1;
+                                    }
+                                    if ( a.index > b.index ){
+                                        return -1;
+                                    }
+                                    return 0;})
     
 
     

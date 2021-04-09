@@ -178,6 +178,62 @@ module.exports = {
 				console.log(error);
 				return false;
 			}
+		},
+		sortByField: async (_, args) => {
+			const { _id, field} = args;
+			const listId = new ObjectId(_id);
+			const list = await Todolist.findOne({_id: listId});
+			let listItems = [...list.items];
+			if(field == "description") {
+				listItems.sort((a, b) => a.description.localeCompare(b.description))
+			}
+			else if(field == "due_date") {
+				listItems.sort((a, b) => a.due_date.localeCompare(b.due_date))
+			}
+			else if(field == "status") {
+				listItems.sort((a, b) => {return (a.completed === b.completed)? 0 : a.completed? -1 : 1;})
+			}
+			else if(field == "assigned_to") {
+				listItems.sort((a, b) => a.assigned_to.localeCompare(b.assigned_to))
+			}
+			else { return false; }
+
+			if(checkIfListsEqual(list.items, listItems)) {
+				listItems.reverse();
+			}
+
+			function checkIfListsEqual(list1, list2){
+				for(let i = 0; i < list1.length; i++) {
+					if(list1[i].id != list2[i].id) {
+						return false;
+					}
+				}
+				return true;
+			}
+
+			try {
+				const updated = await Todolist.updateOne({_id: listId}, { items: listItems });
+				//list.items.forEach((item) => {console.log(item.description)});
+				return true;
+			} catch (error) {
+				return false;
+			}
+		},
+		setList: async (_, args) => {
+
+			const { _id, list } = args;
+			// console.log("ID: " + _id);
+			// console.log("List: " + list);
+			const listId = new ObjectId(_id);
+			try {
+				const listInDatabase = await Todolist.findOne({_id: listId});
+				listInDatabase.items = list;
+				await listInDatabase.save();
+				return true; 
+			} catch (error) {
+				console.log(error);
+				return false;
+			}
 		}
 	}
 }

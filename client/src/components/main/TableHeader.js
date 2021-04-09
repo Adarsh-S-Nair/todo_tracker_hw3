@@ -14,23 +14,25 @@ const TableHeader = (props) => {
     const redoStyle = redoable && !props.disabled ? 'table-header-button' : 'table-header-button-disabled';
     const clickDisabled = () => { };
 
+    console.log("ID: " + props.activeList._id);
+
     return (
         <div className="table-header-container">
             <WRow className={headerStyle}>
                 <WCol size="3">
-                    <WButton className={headerSectionStyle} wType="texted" hoverAnimation={props.disabled ? "" : "lighten"}>Task</WButton>
+                    <WButton onClick={() => {props.sortByField(props.activeList._id, "description")}} className={headerSectionStyle} wType="texted" hoverAnimation={props.disabled ? "" : "lighten"}>Task</WButton>
                 </WCol>
 
                 <WCol size="2">
-                    <WButton className={headerSectionStyle} wType="texted" hoverAnimation={props.disabled ? "" : "lighten"}>Due Date</WButton>
+                    <WButton onClick={() => {props.sortByField(props.activeList._id, "due_date")}} className={headerSectionStyle} wType="texted" hoverAnimation={props.disabled ? "" : "lighten"}>Due Date</WButton>
                 </WCol>
 
                 <WCol size="2">
-                    <WButton className={headerSectionStyle} wType="texted" hoverAnimation={props.disabled ? "" : "lighten"}>Status</WButton>
+                    <WButton onClick={() => {props.sortByField(props.activeList._id, "status")}} className={headerSectionStyle} wType="texted" hoverAnimation={props.disabled ? "" : "lighten"}>Status</WButton>
                 </WCol>
 
                 <WCol size="2">
-                    <WButton className={headerSectionStyle} wType="texted" hoverAnimation={props.disabled ? "" : "lighten"}>Assigned To</WButton>
+                    <WButton onClick={() => {props.sortByField(props.activeList._id, "assigned_to")}} className={headerSectionStyle} wType="texted" hoverAnimation={props.disabled ? "" : "lighten"}>Assigned To</WButton>
                 </WCol>
 
                 <WCol size="3">

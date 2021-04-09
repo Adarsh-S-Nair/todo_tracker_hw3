@@ -31,6 +31,8 @@ const typeDefs = gql `
 		updateItemField(itemId: String!, _id: String!, field: String!, value: String!, flag: Int!): [Item]
 		reorderItems(itemId: String!, _id: String!, direction: Int!): [Item]
 		moveListToTop(_id: String!, owner: String!): Boolean
+		sortByField(_id: String!, field: String!): Boolean
+		setList(_id: String!, list: [ItemInput]): Boolean
 	}
 	input FieldInput {
 		_id: String

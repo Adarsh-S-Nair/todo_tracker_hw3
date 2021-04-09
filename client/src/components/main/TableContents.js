@@ -4,13 +4,14 @@ import TableEntry   from './TableEntry';
 const TableContents = (props) => {
 
     const entries = props.activeList ? props.activeList.items : null;
+    console.log(entries);
     return (
         entries ? <div className=' table-entries container-primary'>
             {
                 entries.map((entry, index) => (
                     <TableEntry
                         list={entries}
-                        data={entry} key={entry.id}
+                        data={entry} key={entry._id}
                         deleteItem={props.deleteItem} reorderItem={props.reorderItem}
                         editItem={props.editItem}
                     />

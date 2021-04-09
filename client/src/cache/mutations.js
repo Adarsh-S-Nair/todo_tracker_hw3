@@ -97,3 +97,15 @@ export const MOVE_LIST_TO_TOP = gql`
 		moveListToTop(_id: $_id, owner: $owner)
 	}
 `;
+
+export const SORT_BY_FIELD = gql`
+	mutation SortByField($_id: String!, $field: String!) {
+		sortByField(_id: $_id, field: $field)
+	}
+`;
+
+export const SET_LIST = gql`
+	mutation SetList($_id: String!, $list: [ItemInput]) {
+		setList(_id: $_id, list: $list)
+	}
+`;
