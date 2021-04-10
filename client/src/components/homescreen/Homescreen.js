@@ -147,7 +147,11 @@ const Homescreen = (props) => {
 			items: [],
 		}
 		const { data } = await AddTodolist({ variables: { todolist: list }, refetchQueries: [{ query: GET_DB_TODOS }] });
-		setActiveList(list)
+		await refetchTodos(refetch);
+		if(data) {
+			let _id = data.addTodolist;
+			handleSetActive(_id);
+		} 
 	};
 
 	const deleteList = async (_id) => {
@@ -230,6 +234,7 @@ const Homescreen = (props) => {
 					{
 						activeList ?
 							<SidebarContents
+								activeList={activeList}
 								todolists={todolists} activeid={activeList.id} auth={auth}
 								handleSetActive={handleSetActive} createNewList={createNewList}
 								updateListField={updateListField}

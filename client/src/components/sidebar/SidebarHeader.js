@@ -2,6 +2,7 @@ import React                    from 'react';
 import { WButton, WRow, WCol }  from 'wt-frontend';
 
 const SidebarHeader = (props) => {
+    const addButtonStyle = props.enabled ? "sidebar-options" : "add-list-disabled sidebar-options";
     return (
         <WRow className='sidebar-header'>
             <WCol size="7">
@@ -13,7 +14,7 @@ const SidebarHeader = (props) => {
             <WCol size="5">
                 {
                     props.auth && <div className="sidebar-options">
-                        <WButton className="sidebar-buttons" onClick={props.createNewList} clickAnimation="ripple-light" shape="rounded" color="primary">
+                        <WButton className="sidebar-buttons" disabled={!props.enabled} onClick={props.enabled ? props.createNewList : null} clickAnimation={props.enabled ? "ripple-light" : ""} shape="rounded" color="primary">
                             <i className="material-icons">add</i>
                         </WButton>
                     </div>

@@ -62,7 +62,7 @@ html, body {
 }
 
 .assigned-to-complete {
-    color: rgb(32, 32, 32);
+    color: var(--warm-black);
 }
 
 .assigned-to-incomplete {
@@ -70,6 +70,7 @@ html, body {
 }
 
 .list-item-active {
+    color: $primary-color;
     background-color: var(--deep-blue);
 }
 
@@ -141,6 +142,7 @@ html, body {
 }
 
 .table-entries {
+    overflow-y: auto;
     scrollbar-width: thin;
 }
 
@@ -240,5 +242,5 @@ textarea:focus, input:focus{
 
 .disabled-table-entry-buttons {
     transition: 0.1s ease-in-out;
-    filter: invert(0.2);
+    color: var(--warm-black);
 }

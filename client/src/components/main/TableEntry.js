@@ -45,7 +45,7 @@ const TableEntry = (props) => {
 
     const handleAssignedEdit = (e) => {
         toggleAssignedEdit(false);
-        const newAssigned = e.target.value ? e.target.value : false;
+        const newAssigned = e.target.value ? e.target.value : "Not Assigned";
         const prevAssigned = assigned_to;
         if(newAssigned != prevAssigned) { props.editItem(data._id, 'assigned_to', newAssigned, prevAssigned); }
     }
@@ -118,7 +118,7 @@ const TableEntry = (props) => {
                     <WButton className={downArrowStyle} onClick={() => {if(!bottomItem) {props.reorderItem(data._id, 1)}}} wType="texted" hoverAnimation={bottomItem ? "" : "lighten"}>
                         <i className="material-icons">expand_more</i>
                     </WButton>
-                    <WButton className="table-entry-buttons" onClick={() => props.deleteItem(data)} wType="texted" hoverAnimation="lighten">
+                    <WButton className="table-entry-buttons" onClick={() => props.deleteItem(data, props.index)} wType="texted" hoverAnimation="lighten">
                         <i className="material-icons">close</i>
                     </WButton>
                 </div>
